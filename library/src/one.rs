@@ -5,6 +5,7 @@
   pub mod sync {
     sync!();
     replace!(
+      crate::one::tokio => crate::one::sync,
       #[tokio::test] => #[test]
     );
   }
@@ -18,22 +19,13 @@ mod one {
 
   #[cfg(test)]
   mod tests {
-    use crate::one;
-
-    #[test]
-    #[cfg(feature = "sync")]
-    fn sync_works() {
-      let result = one::sync::func_one(2, 2);
-      assert_eq!(result, 4);
-    }
+    use crate::one::tokio::func_one;
 
     #[tokio::test]
-    #[cfg(feature = "tokio")]
-    async fn async_works() {
-      let result = one::tokio::func_one(2, 2).await;
-      // assert_eq!(result, 4);
-      // dbg!(result);
-      println!("Result: {}", result);
+    async fn it_works() {
+      // let result = crate::one::tokio::func_one(2, 2).await;
+      let result = func_one(2, 2).await;
+      assert_eq!(result, 4);
     }
   }
 

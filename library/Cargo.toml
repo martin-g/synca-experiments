@@ -10,4 +10,4 @@ tokio = { version = "1.47.0", features = ["full"], optional = true }
 [features]
 sync = []
 tokio = ["dep:tokio"]
-default = ["sync", "tokio"]
+default = []
