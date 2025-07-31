@@ -1,0 +1,13 @@
+[package]
+name = "library"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+synca = "0.5.3"
+tokio = { version = "1.47.0", features = ["full"], optional = true }
+
+[features]
+sync = []
+tokio = ["dep:tokio"]
+default = ["sync", "tokio"]
